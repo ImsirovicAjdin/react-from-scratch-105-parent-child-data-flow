@@ -1,8 +1,8 @@
 import Headings from "./Headings";
 
 function App() {
-  const h1 = "Hello World!"
-  const h2 = "Hello again!"
+  const h1 = prompt("Type the text for the h1 element")
+  const h2 = prompt("Type the text for the h2 element")
   const h3 = "Hello yet again!"
   const h4 = "Once again!"
   return (
