@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This project is [deployed on Netlify]().
+This project is [deployed on Netlify](https://radiant-fudge-d06df6.netlify.app/).
 
 ## Learning Concepts covered
 
