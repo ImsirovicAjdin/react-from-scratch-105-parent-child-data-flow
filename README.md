@@ -1,70 +1,150 @@
-# Getting Started with Create React App
+# About this React app
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+This project is [deployed on Netlify]().
 
-In the project directory, you can run:
+## Learning Concepts covered
 
-### `npm start`
+### Passing data from the parent to the child component
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Commits:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**(1) Passing data as the props object in the child component, using JSX element attributes in the parent component**
 
-### `npm test`
+To accept data in `Headings`, I use the `props` object.
+```jsx
+function Headings(props) {
+    console.log(props)
+    return (
+      <div>
+        <h1>Hello World!</h1>
+        <h2>Hello again!</h2>
+        <h3>Hello yet again!</h3>
+        <h4>Once again!</h4>
+      </div>
+    )
+  }
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+export default Headings;
+```
 
-### `npm run build`
+To pass the data to `Headings`, I add it as HTML properties in the `App` component that renders the `Headings` element.
+```jsx
+import Headings from "./Headings";
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+function App() {
+  return (
+    <div className="App">
+      <Headings
+        h1="Hello World!"
+        h2="Hello again!"
+        h3="Hello yet again!"
+        h4="Once again!"
+    />
+    </div>
+  )
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+export default App;
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Since `props` are just an object, we can access each property on the props object using the dot notation:
+```jsx
+function Headings(props) {
+    console.log(props)
+    return (
+        <div>
+        <h1>{props.h1}</h1>
+        <h2>{props.h2}</h2>
+        <h3>{props.h3}</h3>
+        <h4>{props.h4}</h4>
+        </div>
+    )
+}
 
-### `npm run eject`
+export default Headings;
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**(2) Props values in the parent can come from variables**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+An example of using a variable as a prop value.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```jsx
+import Headings from "./Headings";
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+function App() {
+  const h1 = "Hello World!"
+  const h2 = "Hello again!"
+  const h3 = "Hello yet again!"
+  const h4 = "Once again!"
+  return (
+    <div className="App">
+      <Headings
+        h1={h1}
+        h2={h2}
+        h3={h3}
+        h4={h4}
+    />
+    </div>
+  )
+}
 
-## Learn More
+export default App;
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**(3) You can make the props values in the parent even more dynamic**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This proves with props are so useful.
 
-### Code Splitting
+```jsx
+import Headings from "./Headings";
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+function App() {
+  const h1 = prompt("Type the text for the h1 element")
+  const h2 = prompt("Type the text for the h2 element")
+  const h3 = "Hello yet again!"
+  const h4 = "Once again!"
+  return (
+    <div className="App">
+      <Headings
+        h1={h1}
+        h2={h2}
+        h3={h3}
+        h4={h4}
+    />
+    </div>
+  )
+}
 
-### Analyzing the Bundle Size
+export default App;
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**(4) Change the h3 and h4 variables into calls to the prompt function**
 
-### Making a Progressive Web App
+```jsx
+import Headings from "./Headings";
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+function App() {
+  const h1 = prompt("Type the text for the h1 element")
+  const h2 = prompt("Type the text for the h2 element")
+  const h3 = prompt("Type the text for the h3 element")
+  const h4 = prompt("Type the text for the h4 element")
+  return (
+    <div className="App">
+      <Headings
+        h1={h1}
+        h2={h2}
+        h3={h3}
+        h4={h4}
+    />
+    </div>
+  )
+}
 
-### Advanced Configuration
+export default App;
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Tasks
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Your task is to change the `h3` and `h4` variables into calls to the `prompt` function. Task solutions are in commit number 4.
